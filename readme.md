@@ -17,7 +17,10 @@ Applied strong Myopic Defocus on Wikipedia. For best result, settings should be 
 
 ## Download
 
+### Prebuilt
+
 [Myopic Defocus](https://chromewebstore.google.com/detail/refractify-myopic-defocus/dpnfdlnkgojjihdmgmacnmheflkojijm?hl=en) from Chrome Web Store.
+More info and desktop version: [refractify.io](https://refractify.io/)
 
 ### 🛠 Build locally
 
@@ -53,3 +56,7 @@ Based on [browser-extension-template](https://github.com/fregante/browser-extens
 This browser extension template is released under the [GNU General Public License version 3.0 (GPL-3.0)](#license) and mentioned below.
 
 [![GPL-3.0](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.html)
+
+## Project home
+
+[refractify.io](https://refractify.io/)
