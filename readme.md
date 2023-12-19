@@ -10,7 +10,7 @@
 
 ### Example
 
-Applied strong Myopic Defocus on Wikipedia. For best result, settings should be adjusted for viewing conditions.
+Applied strong Myopic Defocus on Wikipedia. For best result, settings should be adjusted for viewing conditions. The effect is exaggerated for demo.
 <p align="center">
   <img src="https://lh3.googleusercontent.com/PT3Ujag3328oC3AF6c5ihQaldS6Fk_058T9qkjnEKoGqHjsJ5GGLw5mgj8UoMSevkMfqWgROZIme52yJQZUKyjcPg6I=s1280-w1280-h800" alt="Myopic Defocus applied to Wikipedia">
 </p>
