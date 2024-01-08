@@ -45,6 +45,23 @@ function get_blur_circles_px(resx /*real monitor res*/, resy, realWidthMm /*half
     return [blur_b, blur_g];
 }
 
+function blur_to_kernel(stdev){
+    function g(sigma,x){
+        return Math.exp(-(1/2)*(x/sigma)*(x/sigma));
+    }
+
+
+    let oversize = 1.7;
+    let bigsize = Math.floor(stdev*oversize);
+
+    let kernel = [];
+
+    for(let i=-bigsize;i<=bigsize;++i){
+        kernel.push(g(stdev,i));
+    }
+
+    return kernel;
+}
 
 
 async function init() {
@@ -62,8 +79,14 @@ async function init() {
 	const screen_resolution_x = options.resX;
 	const screen_resolution_y = options.resY;
 
-	const real_width_mm = options.widthCM*10.0;
-	const real_height_mm = options.heightCM*10.0;
+	const diag_px = Math.sqrt(screen_resolution_x*screen_resolution_x + screen_resolution_y*screen_resolution_y);
+	const diag_mm = options.diagInch * 25.4;
+	const mm_per_px = diag_mm/diag_px;
+
+	const real_width_mm = screen_resolution_x*mm_per_px;
+	const real_height_mm = screen_resolution_y*mm_per_px
+
+	alert(real_width_mm + " " + real_height_mm);
 
 	const screen_distance_mm = options.sync_screenDistanceCM * 10;
 	const pupil_size_um = 6500;
@@ -120,13 +143,13 @@ async function init() {
 						0 0 1 0 0
 						0 0 0 1 0" />
 
-			<feGaussianBlur id="blue_blur_px" result="blue_ch_blur"  in="blue_ch" stdDeviation="`+blur_b+`" />
-			<feGaussianBlur id="green_blur_px" result="green_ch_blur"  in="green_ch" stdDeviation="`+blur_g+`" />
 
-			<feComposite result="rg_ch" operator="arithmetic" in="red_ch" in2="green_ch_blur" k1="0.0" k2="1" k3="1" k4="0.0"/>
-			<feComposite result="rgb_ch" operator="arithmetic" in="rg_ch" in2="blue_ch_blur" k1="0.0" k2="1" k3="1" k4="0.0"/>
-			<feComposite result="scr_ch" operator="arithmetic" in="SourceGraphic" in2="rgb_ch" k1="0.0" k2="`+(1.0-effect_strength)+`" k3="`+effect_strength+`" k4="0.0"/>
+			<feGaussianBlur color-interpolation-filters="sRGB" id="blue_blur_px" result="blue_ch_blur"  in="blue_ch" stdDeviation="`+blur_b+`" />
+			<feGaussianBlur color-interpolation-filters="sRGB" id="green_blur_px" result="green_ch_blur"  in="green_ch" stdDeviation="`+blur_g+`" />
 
+			<feComposite color-interpolation-filters="sRGB" result="rg_ch" operator="arithmetic" in="red_ch" in2="green_ch_blur" k1="0.0" k2="1" k3="1" k4="0.0"/>
+			<feComposite color-interpolation-filters="sRGB" result="rgb_ch" operator="arithmetic" in="rg_ch" in2="blue_ch_blur" k1="0.0" k2="1" k3="1" k4="0.0"/>
+			<feComposite color-interpolation-filters="sRGB" result="scr_ch" operator="arithmetic" in="SourceGraphic" in2="rgb_ch" k1="0.0" k2="`+(1.0-effect_strength)+`" k3="`+effect_strength+`" k4="0.0"/>
 
 		</filter>
 	</defs>
@@ -147,6 +170,16 @@ async function init() {
 
 	//document.getElementById('blue_blur_px').stdDeviation = blur_b;
 	//document.getElementById('green_blur_px').stdDeviation = blur_g;
+
+	/*
+	 *
+			<feConvolveMatrix in="blue_ch"        result="blue_ch_blur_x" order="`+blur_to_kernel(blur_b).length+` 1"  kernelMatrix="`+blur_to_kernel(blur_b).join(" ")+`" />
+			<feConvolveMatrix in="blue_ch_blur_x" result="blue_ch_blur"   order="1  `+blur_to_kernel(blur_b).length+`" kernelMatrix="`+blur_to_kernel(blur_b).join(" ")+`" />
+
+			<feConvolveMatrix in="green_ch"        result="green_ch_blur_x" order="`+blur_to_kernel(blur_g).length+` 1"  kernelMatrix="`+blur_to_kernel(blur_g).join(" ")+`" />
+			<feConvolveMatrix in="green_ch_blur_x" result="green_ch_blur"   order="1  `+blur_to_kernel(blur_g).length+`" kernelMatrix="`+blur_to_kernel(blur_g).join(" ")+`" />
+
+	*/
 
 }
 
