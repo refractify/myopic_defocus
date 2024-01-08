@@ -86,8 +86,6 @@ async function init() {
 	const real_width_mm = screen_resolution_x*mm_per_px;
 	const real_height_mm = screen_resolution_y*mm_per_px
 
-	alert(real_width_mm + " " + real_height_mm);
-
 	const screen_distance_mm = options.sync_screenDistanceCM * 10;
 	const pupil_size_um = 6500;
 
