@@ -20,7 +20,7 @@ Applied strong Myopic Defocus on Wikipedia. For best result, settings should be 
 ### Prebuilt
 
 - This extension from Chrome Web Store: [Myopic Defocus](https://chromewebstore.google.com/detail/refractify-myopic-defocus/dpnfdlnkgojjihdmgmacnmheflkojijm?hl=en) .
-- More info and desktop version: [refractify.io](https://refractify.io/)
+- Live demo and desktop version: [refractify.io](https://refractify.io/)
 
 ### 🛠 Build locally
 
