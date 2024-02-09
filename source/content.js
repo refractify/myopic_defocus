@@ -158,6 +158,7 @@ async function init() {
 
 	// Set the innerHTML of the container with the SVG markup
 	container.innerHTML = svgMarkup;
+	container.style.display = "none";
 
 	// Append the container to the document
 	document.body.appendChild(container);
