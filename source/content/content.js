@@ -49,30 +49,12 @@ function get_blur_circles_px(
 	return [blur_b, blur_g];
 }
 
-function blur_to_kernel(stdev) {
-	function g(sigma, x) {
-		return Math.exp(-(1 / 2) * (x / sigma) * (x / sigma));
-	}
-
-	let oversize = 1.7;
-	let bigsize = Math.floor(stdev * oversize);
-
-	let kernel = [];
-
-	for (let i = -bigsize; i <= bigsize; ++i) {
-		kernel.push(g(stdev, i));
-	}
-
-	return kernel;
-}
-
 async function init() {
 	const options = await optionsStorage.getAll();
 	const color = `rgb(${options.colorRed}, ${options.colorGreen},${options.colorBlue})`;
 	const text = options.text;
 	const notice = document.createElement('div');
 	notice.innerHTML = text;
-	//document.body.prepend(notice);
 	notice.id = 'text-notice';
 	notice.style.border = '2px solid ' + color;
 	notice.style.color = color;
@@ -176,28 +158,12 @@ async function init() {
 
 	var container = document.createElement('div');
 
-	// Set the innerHTML of the container with the SVG markup
 	container.innerHTML = svgMarkup;
 	container.style.display = 'none';
 
-	// Append the container to the document
 	document.body.appendChild(container);
 
-	//document.body.appendChild(filterElem);
 	document.body.appendChild(blur_layer);
-
-	//document.getElementById('blue_blur_px').stdDeviation = blur_b;
-	//document.getElementById('green_blur_px').stdDeviation = blur_g;
-
-	/*
-	 *
-			<feConvolveMatrix in="blue_ch"        result="blue_ch_blur_x" order="`+blur_to_kernel(blur_b).length+` 1"  kernelMatrix="`+blur_to_kernel(blur_b).join(" ")+`" />
-			<feConvolveMatrix in="blue_ch_blur_x" result="blue_ch_blur"   order="1  `+blur_to_kernel(blur_b).length+`" kernelMatrix="`+blur_to_kernel(blur_b).join(" ")+`" />
-
-			<feConvolveMatrix in="green_ch"        result="green_ch_blur_x" order="`+blur_to_kernel(blur_g).length+` 1"  kernelMatrix="`+blur_to_kernel(blur_g).join(" ")+`" />
-			<feConvolveMatrix in="green_ch_blur_x" result="green_ch_blur"   order="1  `+blur_to_kernel(blur_g).length+`" kernelMatrix="`+blur_to_kernel(blur_g).join(" ")+`" />
-
-	*/
 }
 
 init();
