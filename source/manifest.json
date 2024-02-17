@@ -12,24 +12,24 @@
 		}
 	},
 	"icons": {
-		"128": "icon.png"
+		"128": "assets/icon.png"
 	},
 	"permissions": ["storage"],
 	"host_permissions": ["*://*/*"],
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
-			"js": ["content.js"],
-			"css": ["content.css"],
+			"js": ["content/content.js"],
+			"css": ["content/content.css"],
 			"run_at": "document_end"
 		}
 	],
 	"options_ui": {
 		"browser_style": true,
-		"page": "options.html"
+		"page": "options/options.html"
 	},
 	"background": {
-		"service_worker": "background.js",
+		"service_worker": "background/background.js",
 		"type": "module"
 	}
 }
