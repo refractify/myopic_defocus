@@ -14,17 +14,13 @@
 	"icons": {
 		"128": "icon.png"
 	},
-	"permissions": [
-		"storage"
-	],
-	"host_permissions": [
-		"*://*/*"
-	],
+	"permissions": ["storage"],
+	"host_permissions": ["*://*/*"],
 	"content_scripts": [
 		{
-			"matches": [ "<all_urls>" ],
-			"js": [ "content.js" ],
-			"css": [ "content.css" ],
+			"matches": ["<all_urls>"],
+			"js": ["content.js"],
+			"css": ["content.css"],
 			"run_at": "document_end"
 		}
 	],
