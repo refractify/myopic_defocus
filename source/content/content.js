@@ -2,17 +2,39 @@ import optionsStorage from '../options/options-storage.js';
 
 console.log('💈 Content script loaded for', chrome.runtime.getManifest().name);
 
+/**
+ *
+ * @param {Object} params
+ * @param {number} params.lca_rif
+ * @param {number} params.screen
+ * @param {number} params.pupil
+ * @param {number} params.pix
+ * @returns {number}
+ */
+function calculateBlurForChannel({ lca_rif, screen, pupil, pix }) {
+	const G = 1000 / (1000 / screen + lca_rif);
+	const circ = pupil * ((screen - G) / G);
+	return circ / pix;
+}
+
+/**
+ *
+ * @param {number} resx Horizontal resolution
+ * @param {number} resy Vertical resolution
+ * @param {number} realWidthMm
+ * @param {number} RealHeightMm
+ * @param {number} p_screenDistanceMm
+ * @param {number} p_pupilSizeUm
+ * @returns {[number, number]}
+ */
 function get_blur_circles_px(
-	resx /*real monitor res*/,
+	resx,
 	resy,
 	realWidthMm /*half screen stuff no matter*/,
 	RealHeightMm,
 	p_screenDistanceMm,
 	p_pupilSizeUm,
 ) {
-	let blur_b;
-	let blur_g;
-
 	let pix = realWidthMm / resx; //mm
 
 	const lca_nat_r = -0.23; //D
@@ -28,23 +50,19 @@ function get_blur_circles_px(
 	const pupil = p_pupilSizeUm / 1000.0; //6.5 //mm
 	const screen = p_screenDistanceMm; //2000 //mm
 
-	{
-		const lca = lca_rif_b;
+	const blur_b = calculateBlurForChannel({
+		lca_rif: lca_rif_b,
+		screen,
+		pupil,
+		pix,
+	});
 
-		const G = 1000 / (1000 / screen + lca);
-		const circ = pupil * ((screen - G) / G);
-
-		blur_b = circ / pix;
-	}
-
-	{
-		const lca = lca_rif_g;
-
-		const G = 1000 / (1000 / screen + lca);
-		const circ = pupil * ((screen - G) / G);
-
-		blur_g = circ / pix;
-	}
+	const blur_g = calculateBlurForChannel({
+		lca_rif: lca_rif_g,
+		screen,
+		pupil,
+		pix,
+	});
 
 	return [blur_b, blur_g];
 }
