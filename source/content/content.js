@@ -93,7 +93,7 @@ async function init() {
 	const screen_distance_mm = options.sync_screenDistanceCM * 10;
 	const pupil_size_um = 6500;
 
-	let [blur_b_got, blur_g_got] = get_blur_circles_px(
+	const [blur_b_got, blur_g_got] = get_blur_circles_px(
 		screen_resolution_x,
 		screen_resolution_y,
 		real_width_mm,
@@ -122,7 +122,7 @@ async function init() {
 					  pointer-events: none;\
 					  display: block;';
 
-	var svgMarkup =
+	const svgMarkup =
 		`
 	<svg xmlns="http://www.w3.org/2000/svg">
 	<defs>
@@ -174,7 +174,7 @@ async function init() {
 	</svg>
 	`;
 
-	var container = document.createElement('div');
+	const container = document.createElement('div');
 
 	container.innerHTML = svgMarkup;
 	container.style.display = 'none';
