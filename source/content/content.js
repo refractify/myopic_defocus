@@ -122,8 +122,7 @@ async function init() {
 					  pointer-events: none;\
 					  display: block;';
 
-	const svgMarkup =
-		`
+	const svgMarkup = `
 	<svg xmlns="http://www.w3.org/2000/svg">
 	<defs>
 		<filter id="RefractifyBlending1" x="0" y="0" width="100%" height="100%">
@@ -154,21 +153,11 @@ async function init() {
 						0 0 0 1 0" />
 
 
-			<feGaussianBlur color-interpolation-filters="sRGB" id="blue_blur_px" result="blue_ch_blur"  in="blue_ch" stdDeviation="` +
-		blur_b +
-		`" />
-			<feGaussianBlur color-interpolation-filters="sRGB" id="green_blur_px" result="green_ch_blur"  in="green_ch" stdDeviation="` +
-		blur_g +
-		`" />
-
+			<feGaussianBlur color-interpolation-filters="sRGB" id="blue_blur_px" result="blue_ch_blur"  in="blue_ch" stdDeviation="${blur_b}" />
+			<feGaussianBlur color-interpolation-filters="sRGB" id="green_blur_px" result="green_ch_blur"  in="green_ch" stdDeviation="${blur_g}" />
 			<feComposite color-interpolation-filters="sRGB" result="rg_ch" operator="arithmetic" in="red_ch" in2="green_ch_blur" k1="0.0" k2="1" k3="1" k4="0.0"/>
 			<feComposite color-interpolation-filters="sRGB" result="rgb_ch" operator="arithmetic" in="rg_ch" in2="blue_ch_blur" k1="0.0" k2="1" k3="1" k4="0.0"/>
-			<feComposite color-interpolation-filters="sRGB" result="scr_ch" operator="arithmetic" in="SourceGraphic" in2="rgb_ch" k1="0.0" k2="` +
-		(1.0 - effect_strength) +
-		`" k3="` +
-		effect_strength +
-		`" k4="0.0"/>
-
+			<feComposite color-interpolation-filters="sRGB" result="scr_ch" operator="arithmetic" in="SourceGraphic" in2="rgb_ch" k1="0.0" k2="${1.0 - effect_strength}" k3="${effect_strength}" k4="0.0"/>
 		</filter>
 	</defs>
 	</svg>
