@@ -3,8 +3,12 @@ import 'webext-base-css';
 import './options.css';
 import optionsStorage from './options-storage.js';
 
-const rangeInputs = [...document.querySelectorAll('input[type="range"][name^="sync_"]')];
-const numberInputs = [...document.querySelectorAll('input[type="number"][name^="sync_"]')];
+const rangeInputs = [
+	...document.querySelectorAll('input[type="range"][name^="sync_"]'),
+];
+const numberInputs = [
+	...document.querySelectorAll('input[type="number"][name^="sync_"]'),
+];
 //const output = document.querySelector('.color-output');
 
 function updateOutputColor() {
@@ -12,7 +16,8 @@ function updateOutputColor() {
 }
 
 function updateInputField(event) {
-	numberInputs[rangeInputs.indexOf(event.currentTarget)].value = event.currentTarget.value;
+	numberInputs[rangeInputs.indexOf(event.currentTarget)].value =
+		event.currentTarget.value;
 }
 
 for (const input of rangeInputs) {

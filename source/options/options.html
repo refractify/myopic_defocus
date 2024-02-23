@@ -1,0 +1,84 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>Options</title>
+
+<form id="options-form" class="detail-view-container">
+	<h3>Settings</h3>
+	<div class="color-picker">
+		<div class="color-inputs">
+			<label class="color-input">
+				<span>Screen diagonal (inches)</span>
+				<input
+					style="width: 200px"
+					type="number"
+					name="diagInch"
+					min="0"
+					max="200"
+				/>
+			</label>
+
+			<label class="color-input">
+				<span>Screen resolution x,y (px)</span>
+				<input
+					style="width: 100px"
+					type="number"
+					name="resX"
+					min="0"
+					max="5000"
+				/>
+				<input
+					style="width: 100px"
+					type="number"
+					name="resY"
+					min="0"
+					max="5000"
+				/>
+			</label>
+
+			<label class="color-input">
+				<span>Physical screen distance(cm)</span>
+				<input type="range" min="0" max="150" name="sync_screenDistanceCM" />
+				<input type="number" name="sync_screenDistanceCM" min="0" max="150" />
+			</label>
+			<label class="color-input">
+				<span>Effect strength(%)</span>
+				<input
+					type="range"
+					min="10"
+					max="35"
+					name="sync_effectStrengthPercent"
+				/>
+				<input
+					type="number"
+					min="10"
+					max="35"
+					name="sync_effectStrengthPercent"
+					min="0"
+					max="100"
+				/>
+			</label>
+		</div>
+		<!--<div class="color-output" ></div>-->
+		<p>
+			This extension will calculate the Longitudinal Chromatic Aberration of a
+			0.23D myopically defocused light and applies it to the website. Makes the
+			screen appear more distant on the retina.
+		</p>
+		<p>
+			This effect is being researched for its myopia prevention properties in
+			animals and humans For optimized desktop version visit:
+			<a href="https://refractify.io/">https://refractify.io/</a>
+		</p>
+	</div>
+	<!--
+	<h3>Notice Content</h3>
+	<div class="text-inputs">
+		<label class="text-input">
+			<span>Text</span>
+			<input type="text" name="text">
+		</label>
+	</div>
+	-->
+</form>
+
+<script src="options.js" type="module"></script>

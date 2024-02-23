@@ -11,9 +11,7 @@ const optionsStorage = new OptionsSync({
 		sync_effectStrengthPercent: 10,
 		text: 'Set a text!',
 	},
-	migrations: [
-		OptionsSync.migrations.removeUnused,
-	],
+	migrations: [OptionsSync.migrations.removeUnused],
 	logging: true,
 });
 
